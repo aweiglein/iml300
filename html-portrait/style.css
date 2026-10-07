@@ -1,5 +1,5 @@
 body {
-  background-image: url("assets/sky.gif");
+  background-image: url("assets/bluesparklereal.gif");
   background-size: cover;
   height: 100vh;
 }
@@ -24,6 +24,9 @@ p:hover {
   letter-spacing: 0.1em;
 }
 
+p{-webkit-text-fill-color: #b2fffa}
+
+
 .specialCenter {
   display: flex;
   flex-direction: column;
@@ -32,6 +35,11 @@ p:hover {
 
 h1,
 a {
+  font-family: "Ultra", serif;
+  font-weight: 400;
+  font-style: normal;
+
+
   animation: coolAnimation 3s infinite;
 }
 
