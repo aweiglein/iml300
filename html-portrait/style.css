@@ -7,21 +7,21 @@ body {
 img {
   height: 150px;
   border-radius: 20px;
-  padding: 10px;
-  transition: 1s;
-  filter: grayscale(100%);
+  padding: 12px;
+  transition: 0.5s;
+  filter: grayscale(50%);
   /*      border: 3px solid blue; */
 }
 
 img:hover {
-  height: 400px;
+  height: 250px;
   filter: grayscale(0%);
   /*   border: 1px solid red; */
 }
 
 p:hover {
   /*   transform: rotate(5deg); */
-  letter-spacing: 1em;
+  letter-spacing: 0.1em;
 }
 
 .specialCenter {
