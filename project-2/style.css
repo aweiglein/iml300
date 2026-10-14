@@ -14,13 +14,13 @@ body {
 
 h1{
   font-family: "Georgia";
-  font-size: 1.4rem;
+  font-size: 1.8rem;
     font-weight: 400;
   margin: 28px 0;
 }
 
 p{
-  font-size: 1.15rem;
+  font-size: 1.8rem;
   font-weight: normal;
   margin-bottom: 28px;
 }
@@ -28,7 +28,7 @@ p{
 a {
   color: #2f2f2f;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 a:hover {
