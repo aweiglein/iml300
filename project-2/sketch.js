@@ -12,3 +12,7 @@ function draw() {
 
   line (40,0,40,height);
 }
+
+function windowResized() {
+    resizeCanvas(windowWidth,windowHeight);
+}
