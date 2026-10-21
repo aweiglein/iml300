@@ -68,6 +68,25 @@ a:hover {
 }
 .delay5 {
   animation-delay: 10.4s;
+  
+}
+
+.delay4slow {
+  animation-delay: 7.8;
+
+} 
+
+.delay2fast {
+  animation-delay: 2s;
+    
+}
+
+.delay3fast {
+  animation-delay: 4s;
+}
+
+.delaynextfast {
+  animation-delay: 4.8s;
 }
 
 @keyframes fadeUp {
