@@ -29,24 +29,30 @@ function playLineSound(line) {
   }
 }
 
-if (memoryLines.length > 0) {
-  setTimeout(function() {
-    memoryLines[0].classList.add("visible");
-  }, 100);
+const openingHasSound =
+      memoryLines.length > 0 && memoryLines[0].dataset.sound;
+
+if (memoryLines.length > 0 && !openingHasSound) {
+    setTimeout(function() {
+        memoryLines[0].classList.add("visible");
+    }, 100);
 }
 
 if (nextLink) {
   nextLink.addEventListener("click", function(event) {
+      if (openingHasSound && !memoryLines[0].classList.contains("visible")) {
+  event.preventDefault();
 
+  playLineSound(memoryLines[0]);
+  memoryLines[0].classList.add("visible");
+  return;
+}
+      
     if (currentLine < memoryLines.length - 1) {
       event.preventDefault();
 
       memoryLines[currentLine].classList.remove("visible");
       memoryLines[currentLine].classList.add("dimmed");
-
-    if (currentLine === 0) {
-    playLineSound(memoryLines[0]);
-    }
         
       currentLine++;
 
