@@ -21,7 +21,7 @@
         People don't stop walking. 
         </p>
 
-    <a class="fade" last="--in:9s" href="memory3.html">next</a>   
+    <a class="fade" style="--in:9s" href="memory3.html">next</a>   
         
       <script src="sketch.js">
         </script>
@@ -30,13 +30,15 @@
     <script>
     const windSound = document.getElementById("windSound");
     
-        console.log("Audio location:", windSound.src);
-        
-    window.addEventListener("load", function() {
-    windSound.play().catch(function(error) {
-    console.log("hmm...the sound isn't playing:", error);
-    });
-    });
+        document.addEventListener("click", function() {
+            windSound.play();
+              .then(function() {
+        console.log("Audio playback started!");
+      })
+      .catch(function(error) {
+        console.log("Audio failed:", error);
+      });
+        }, {once: true});
     </script>
         
     </body>
