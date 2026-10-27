@@ -21,6 +21,9 @@ function playLineSound(line) {
     activeSounds = activeSounds.filter(s => s !== sound);
   });
 
+const delay = Number(line.dataset.soundDelay || 0);
+
+setTimeout(function() {
   sound.play().then(function() {
     let volume = 0;
 
@@ -42,10 +45,13 @@ function playLineSound(line) {
     console.log("Audio couldn't play:", error);
     activeSounds = activeSounds.filter(s => s !== sound);
   });
+    
+}, delay);
 }
 
 
 function fadeOutAndNavigate(destination) {
+    if (isLeaving) return;
   if (isLeaving) return;
   isLeaving = true;
 
