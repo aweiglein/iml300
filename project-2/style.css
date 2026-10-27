@@ -47,46 +47,30 @@ a {
 a:hover {
   text-decoration: underline;
 }
-
 .fade {
   opacity: 0;
   transform: translateY(8px);
-  animation: fadeUp 1.2s ease forwards;
-}
-.delay1 {
-  animation-delay: 0s;
-}
-.delay2 {
-  animation-delay: 3.4s;
-}
-.delay3 {
-  animation-delay: 5.4s;
+  animation:
+    fadeUp 1.2s ease var(--in) forwards,
+    dim 2s ease var(--out) forwards;
 }
 
-.delay4 {
-  animation-delay: 7.4s;
-}
-.delay5 {
-  animation-delay: 10.4s;
-  
+.fade.last {
+  animation: fadeUp 1.2s ease var(--in) forwards;
 }
 
-.delay4slow {
-  animation-delay: 7.8;
-
-} 
-
-.delay2fast {
-  animation-delay: 2s;
-    
+a.fade {
+  display: inline-block; /* lets the upward slide work on a link */
 }
 
-.delay3fast {
-  animation-delay: 4s;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.delaynextfast {
-  animation-delay: 4.8s;
+@keyframes dim {
+  from { opacity: 1; }
+  to   { opacity: 0.35; }
 }
 
 @keyframes fadeUp {
