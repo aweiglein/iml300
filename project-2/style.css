@@ -73,14 +73,42 @@ a.fade {
   to   { opacity: 0.35; }
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  
   to {
     opacity: 1;
     transform: translateY(0)
   }
+  
+  .clickMemory .fade {
+    animation: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+  
+  .clickMemory .fade.visible {
+    opacity:1;
+    transform: translateY(0);
+  }
+
+.clickMemory .fade.dimmed {
+  opacity: 0.35;
+  transform: translateY(0);
+}
+  
+
+.clickMemory a.fade {
+  opacity: 1;
+  transform: translateY(0);
+  animation: none;
+  pointer-events: auto;
+}
+
+#readAgain {
+  display: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+#readAgain.visible {
+  opacity: 1
 }
