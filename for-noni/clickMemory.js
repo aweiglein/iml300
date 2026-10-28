@@ -10,9 +10,13 @@ let isLeaving = false;
 function playLineSound(line) {
   const soundFile = line.dataset.sound;
 
-  if (!soundFile) return;
+ if (!soundFile) return;
 
-  const sound = new Audio(soundFile);
+// Prevent the same line from starting its audio twice.
+if (line.dataset.soundPlayed === "true") return;
+line.dataset.soundPlayed = "true";
+
+const sound = new Audio(soundFile);
   sound.volume = 0;
 
   activeSounds.push(sound);
