@@ -10,10 +10,11 @@ let isLeaving = false;
 function playLineSound(line) {
   const soundFile = line.dataset.sound;
 
- if (!soundFile) return;
+if (!soundFile) return;
 
-// Prevent the same line from starting its audio twice.
+// Only allow this paragraph's sound to start once.
 if (line.dataset.soundPlayed === "true") return;
+
 line.dataset.soundPlayed = "true";
 
 const sound = new Audio(soundFile);
