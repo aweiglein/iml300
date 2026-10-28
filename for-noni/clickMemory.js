@@ -98,6 +98,8 @@ if (nextLink) {
   nextLink.addEventListener("click", function(event) {
     event.preventDefault();
 
+    nextLink.querySelector(".nextImage")?.classList.add("clicked");
+    
     if (isLeaving) return;
 
    

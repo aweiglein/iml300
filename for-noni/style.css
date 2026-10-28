@@ -107,3 +107,36 @@ a.fade {
 #readAgain.visible {
   opacity: 1
 }
+
+.nextImage {
+  width: 55px;
+  height: auto;
+  cursor: pointer;
+  transition: filter 1.2s ease, transform 0.4s ease;
+}
+
+.nextImage:hover {
+  transform: scale(1.1);
+  filter: grayscale(100%);
+}
+
+.nextImage:active {
+  filter: grayscale(100%);
+}
+
+@keyframes perfumeBreathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.nextImage {
+  animation: perfumeBreathe 3s ease-in-out infinite;
+}
+.nextImage.clicked {
+  animation: none;
+}
