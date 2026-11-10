@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LambdaMOO Travel Bureau</title>
+
+<style>
+:root {
+  --bg: #f4f4ef;
+  --fg: #111;
+  --g: #1a9a00;
+  --dim: #777;
+  --line: #bbb;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0b0b;
+    --fg: #e8e8e8;
+    --g: #7dff5c;
+    --dim: #8a8a8a;
+    --line: #333;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b0b0b;
+  --fg: #e8e8e8;
+  --g: #7dff5c;
+  --dim: #8a8a8a;
+  --line: #333;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 Helvetica, Arial, sans-serif;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 18px 60px;
+}
+
+h1 {
+  color: var(--g);
+  font-weight: 400;
+  font-size: clamp(22px, 5vw, 32px);
+  line-height: 1.15;
+  margin: 8px 0 4px;
+}
+
+.sub {
+  color: var(--dim);
+  font: 13px ui-monospace, Menlo, monospace;
+  margin-bottom: 22px;
+}
+
+#log {
+  font: 14px/1.6 ui-monospace, Menlo, Consolas, monospace;
+  min-height: 200px;
+  border-left: 2px solid var(--g);
+  padding-left: 14px;
+}
+
+#log p { margin: 0 0 10px; }
+
+.g { color: var(--g); }
+.d { color: var(--dim); }
+
+.pill {
+  display: inline-block;
+  border: 1.5px solid var(--g);
+  color: var(--g);
+  border-radius: 99px;
+  padding: 0 7px;
+  font-size: 11px;
+  vertical-align: middle;
+  margin: 0 3px;
+}
+
+.opts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+button {
+  font: inherit;
+  background: none;
+  color: var(--fg);
+  border: 1.5px solid var(--g);
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover,
+button:focus-visible {
+  background: var(--g);
+  color: var(--bg);
+  outline: none;
+}
+
+button small {
+  display: block;
+  font: 11px ui-monospace, monospace;
+  opacity: .75;
+  margin-top: 2px;
+}
+
+button.empty {
+  border-style: dashed;
+  border-color: var(--dim);
+  color: var(--dim);
+}
+
+button.empty:hover {
+  background: none;
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px dotted var(--line);
+  padding: 6px 0;
+}
+
+/* NEW: Smaller buttons for revealing risks */
+.row button {
+  padding: 4px 8px;
+  font: 12px ui-monospace, monospace;
+  flex-shrink: 0;
+}
+
+.passport {
+  margin-top: 30px;
+  border: 1.5px solid var(--line);
+  padding: 14px;
+  border-radius: 6px;
+}
+
+.passport h2 {
+  font: 12px ui-monospace, monospace;
+  letter-spacing: .1em;
+  color: var(--dim);
+  margin: 0 0 10px;
+  font-weight: 400;
+}
+
+.stamp {
+  display: inline-block;
+  border: 2px solid var(--g);
+  color: var(--g);
+  padding: 4px 10px;
+  margin: 0 8px 8px 0;
+  transform: rotate(-3deg);
+  font: 12px ui-monospace, monospace;
+  text-transform: uppercase;
+}
+
+.stamp:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.q {
+  font-size: 13px;
+  color: var(--dim);
+  margin-top: 30px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<h1>Race In/For Cyberspace</h1>
+
+<div class="sub">
+  LAMBDAMOO TRAVEL BUREAU // after Lisa Nakamura,
+  <i>Works and Days</i> 13 (1995)
+</div>
+
+<div id="log"></div>
+<div id="ui"></div>
+
+<div class="passport">
+  <h2>PASSPORT</h2>
+  <div id="stamps">
+    <span class="d" style="font:13px ui-monospace,monospace">
+      no stamps yet
+    </span>
+  </div>
+  <div id="tally" class="d"
+       style="font:12px ui-monospace,monospace;margin-top:6px">
+  </div>
+</div>
+
+<div class="q">
+  Nakamura reads this kind of play as
+  <span class="pill">tourism</span>
+  a recreational crossing, with the risks of being a racial minority
+  left at the door. This piece is a critique, not a travel guide.
+</div>
+
+</main>
+
+<script>
+const log = document.getElementById('log');
+const ui = document.getElementById('ui');
+const stamps = document.getElementById('stamps');
+const tally = document.getElementById('tally');
+
+const T = [
+  { n: 'Samurai', t: 'Honor. Swords. Mystique.' },
+  { n: 'Ninja', t: 'Stealth. Speed. Mystique.' },
+  { n: 'Geisha', t: 'Grace. Tea. Mystique.' },
+  { n: 'Kung-fu Master', t: 'Wisdom. Fists. Mystique.' }
+];
+
+const R = [
+  ['being stereotyped', 'waived'],
+  ['being passed over', 'never issued'],
+  ['being asked "where are you really from"', 'not applicable to you'],
+  ['being read as a type', 'opt-out available'],
+  ['being a minority at all', 'expires on log off']
+];
+
+let trips = [];
+let miss = 0;
+let busy = false;
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function say(h, c) {
+  const p = document.createElement('p');
+
+  if (c) p.className = c;
+
+  p.innerHTML = h;
+  log.appendChild(p);
+
+  p.scrollIntoView({
+    block: 'nearest',
+    behavior: 'smooth'
+  });
+
+  return p;
+}
+
+async function type(h, c) {
+  const p = say('', c);
+  const tmp = document.createElement('div');
+
+  tmp.innerHTML = h;
+  const s = tmp.textContent;
+
+  if (/< /.test(h)) {
+    p.innerHTML = h;
+    return;
+  }
+
+  for (let i = 0; i < s.length; i++) {
+    p.textContent += s[i];
+
+    if (i % 2) {
+      await sleep(12);
+    }
+  }
+}
+
+function menu() {
+  ui.innerHTML = '';
+
+  const o = document.createElement('div');
+  o.className = 'opts';
+
+  T.forEach((x, i) => {
+    const b = document.createElement('button');
+
+    b.innerHTML = x.n + '<small>' + x.t + '</small>';
+    b.onclick = () => go(i);
+
+    o.appendChild(b);
+  });
+
+  const e = document.createElement('button');
+
+  e.className = 'empty';
+  e.innerHTML = '— <small>no listing</small>';
+  e.onclick = absent;
+
+  o.appendChild(e);
+  ui.appendChild(o);
+}
+
+async function intro() {
+  await type('> connect lambdamoo.travel', 'g');
+  await type('Surfing the Internet is already travel: recreational, exotic, exciting.');
+  await type('Where would you like to go today? Pick an identity.');
+
+  menu();
+}
+
+async function go(i) {
+  if (busy) return;
+
+  busy = true;
+  ui.innerHTML = '';
+
+  const x = T[i];
+
+  await type('> become ' + x.n.toLowerCase(), 'g');
+
+  await type(
+    'You are now a ' + x.n +
+    '. Players around you read a type, not a person. It is fun!'
+  );
+
+  const l = say('<span class="d">RISK LEDGER</span>');
+
+  // NEW: Interactive risk reveal buttons
+  for (const [r, s] of R) {
+    await sleep(450);
+
+    const d = document.createElement('div');
+    d.className = 'row';
+
+    const risk = document.createElement('span');
+    risk.textContent = r;
+
+    const reveal = document.createElement('button');
+    reveal.textContent = 'Reveal →';
+
+    reveal.onclick = () => {
+      reveal.textContent = s;
+      reveal.style.color = 'var(--g)';
+      reveal.disabled = true;
+    };
+
+    d.appendChild(risk);
+    d.appendChild(reveal);
+    l.appendChild(d);
+  }
+
+  await sleep(500);
+
+  trips.push(x.n);
+  addStamp(x.n);
+
+  await type(
+    'Your real-life risks: unchanged. Log off whenever you like.',
+    'd'
+  );
+
+  const b = document.createElement('button');
+  b.textContent = 'Log off';
+
+  b.onclick = async () => {
+    ui.innerHTML = '';
+
+    await type('> logout', 'g');
+
+    await type(
+      'You return as yourself. Nobody who lives the identity you wore gets a log off button.'
+    );
+
+    busy = false;
+    menu();
+  };
+
+  ui.appendChild(b);
+}
+
+async function absent() {
+  if (busy) return;
+
+  busy = true;
+  ui.innerHTML = '';
+  miss++;
+
+  addStamp(null);
+
+  await type('> become someone ordinary, specific, and Asian', 'g');
+  await type('ERROR 404: no such listing.', 'g');
+  await type(
+    'Seldom enacted here. Its absence can only be read as a symptom of suppression.'
+  );
+
+  const b = document.createElement('button');
+  b.textContent = 'Back to the bureau';
+
+  b.onclick = () => {
+    busy = false;
+    menu();
+  };
+
+  ui.appendChild(b);
+}
+
+function addStamp(n) {
+  if (!stamps.querySelector('.stamp')) {
+    stamps.innerHTML = '';
+  }
+
+  if (n) {
+    const s = document.createElement('span');
+
+    s.className = 'stamp';
+    s.textContent = n;
+
+    stamps.appendChild(s);
+  }
+
+  tally.textContent =
+    'trips taken: ' + trips.length +
+    ' // non-stereotyped listings found: 0' +
+    ' // attempts to find one: ' + miss;
+}
+
+intro();
+</script>
+
+</body>
+</html>
