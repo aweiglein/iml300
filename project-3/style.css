@@ -1,0 +1,64 @@
+body {
+    background-color: #f6d7f5;
+    color: #302A38;
+    font-family: Georgia, serif;
+    
+    .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 39px;
+    }
+    
+            .lost-card {
+                grid-column: 1 / 3;
+}
+    
+    .options a {
+        display: block;
+        padding: 50px 30px;
+        border-radius: 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 32px;
+        font-weight: bold; 
+        color: #302A38;
+        background-color: #E6C8FF;
+        transition: transform 0.2s ease;
+        
+    }
+    
+    .options a:hover {
+        transform: scale(1.05);
+        
+    }
+    
+    .story-scene {
+        width: 90%;
+        max-width: 1100px;
+        min-height: 450px;
+        margin: 30px auto;
+        padding: 30px;
+        background-color: #c5f3f8;
+        border-radius: 20px;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #floatingNotes {
+        position: relative;
+        width: 100%;
+        min-height: 400px;
+        overflow: hidden;
+    
+    .bubble {
+        width: 200px;
+        min-height: 200px;
+        padding: 30px;
+        border-radius: 50%;
+        
+        background-color: #E6C8FF;
+        color: #302A38
+        }
+}
