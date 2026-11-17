@@ -51,14 +51,41 @@ body {
         width: 100%;
         min-height: 400px;
         overflow: hidden;
+        
+    }
     
     .bubble {
-        width: 200px;
-        min-height: 200px;
-        padding: 30px;
+        width: 160px;
+        min-height: 160px;
+        padding: 25px;
         border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         
         background-color: #E6C8FF;
         color: #302A38
         }
+        
+        .carnival-game {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .strength-tester {
+            background-color: #d9fbff;
+            border: 4px solid #513451;
+            border-radius: 20px;
+            
+            width: 250px;
+            height: 400px;
+            
+            margin: 30px auto;
+            padding: 20px; 
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 }
