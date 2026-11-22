@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDApgfQYeVCqkQuvgO-1hSnnxvYlMEZGpc",
@@ -16,6 +16,10 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 const responsesRef = ref(database, "responses");
+
+onChildAdded(responsesRef, function(snapshot) {
+    console.log("Recieved response:", snapshot.val());
+});
 
 console.log("Firebase database initialized!", database);
 
