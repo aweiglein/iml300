@@ -17,8 +17,47 @@ const database = getDatabase(app);
 
 const responsesRef = ref(database, "responses");
 
+const floatingNotes = document.getElementById("floatingNotes");
+
 onChildAdded(responsesRef, function(snapshot) {
-    console.log("Recieved response:", snapshot.val());
+    
+const data = snapshot.val();
+    
+const bubble = document.createElement("div");
+    
+bubble.classList.add("bubble");
+    
+    const colors = [
+        "#fff6fb",
+        "#f9f0ff",
+        "#f4f8ff",
+        "#f6fff2",
+        "#ffeef5",
+        "#eef7ff"
+        
+        ];
+    
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    bubble.style.setProperty("--cloud-color", randomColor);
+
+    bubble.innerHTML = `
+    <div class="cloud-shape">
+    <span class="puff puff1"></span>
+    <span class="puff puff2"></span>
+    <span class="puff puff3"></span>
+    <span class="puff puff4"></span>
+    <span class="puff puff5"></span>
+    <span class="puff puff6"></span>
+    <span class="puff puff7"></span>
+    <span class="puff puff8"></span>
+    <span class="center"></span>
+</div>
+<div class="cloud-text">${data.text}</div>
+    
+`;
+    bubble.querySelector(".cloud-text").textContent = data.text;
+    
+    floatingNotes.appendChild(bubble);
 });
 
 console.log("Firebase database initialized!", database);
