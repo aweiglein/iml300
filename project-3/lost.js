@@ -11,7 +11,7 @@ const firebaseConfig = {
     appId: "1:483208001205:web:551005a07af6c4a38970fc"
   };
 
-const app = initializeApp(firebaseConfig);AbortController;
+const app = initializeApp(firebaseConfig);
 
 const database = getDatabase(app);
 
