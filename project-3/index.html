@@ -21,6 +21,30 @@
 <a href="lost.html" class="lost-card">lost</a> 
     
 </div>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDApgfQYeVCqkQuvgO-1hSnnxvYlMEZGpc",
+    authDomain: "iml300-project3-609d6.firebaseapp.com",
+    databaseURL: "https://iml300-project3-609d6-default-rtdb.firebaseio.com",
+    projectId: "iml300-project3-609d6",
+    storageBucket: "iml300-project3-609d6.firebasestorage.app",
+    messagingSenderId: "483208001205",
+    appId: "1:483208001205:web:551005a07af6c4a38970fc"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+    const database = getDatabase (app);
+</script>
+
+       
     </body>
+    
 </html>
