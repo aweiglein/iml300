@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDApgfQYeVCqkQuvgO-1hSnnxvYlMEZGpc",
@@ -15,6 +15,8 @@ const app = initializeApp(firebaseConfig);AbortController;
 
 const database = getDatabase(app);
 
+const responsesRef = ref(database, "responses");
+
 console.log("Firebase database initialized!", database);
 
 console.log("hello!")
@@ -22,9 +24,27 @@ console.log("hello!")
 const submitButton = document.getElementById("submitAdvice");
 const adviceInput = document.getElementById("adviceInput");
 
-submitButton.addEventListener("click", function() {
-const response = adviceInput.value;
-    
-    alert(response);
-});
+submitButton.addEventListener("click", async function() {
+const response = adviceInput.value.trim();
 
+    if (response === "") {
+        alert("pressed enter with no writing...?");
+        return;
+        
+    }
+    
+    try {
+        await push(responsesRef, {
+            text: response
+        });
+        
+    alert("your response was saved!");
+        adviceInput.value = "";
+        
+    } catch (error) {
+        console.error("hmm... there was an error saving your response:", error)
+        alert("something went wrong. hamsters are spinning in their wheels to fix it.");
+
+    }
+    
+});
