@@ -53,6 +53,7 @@ body {
         width: 100%;
         min-height: 400px;
         overflow: hidden;
+        outline: 2px dashed #A977B0;
         
     }
     
@@ -61,6 +62,7 @@ body {
         width: 255px;
         min-height: 175px;
         margin: 30px auto;
+        animation: wander 12s ease-in-out infinite
         
 }
 .cloud-shape {
@@ -79,14 +81,14 @@ body {
     position: absolute;
     left: 35.5px;
     top: 28px;
-    width: 184px;
-    height: 96px;
+    width: 200px;
+    height: 100px;
     border-radius: 48px;
     
 }
 
 .puff {
-    width: 70px;
+    width: 100px;
     height: 70px;
     border-radius: 50%;
     
@@ -110,12 +112,12 @@ body {
 }
 .puff4 {
     top: 42px;
-    left: 0px;
+    left: 0;
     
 }
 .puff5 {
     top: 42px;
-    right: 0px;
+    right: 0;
     
 }
 .puff6 {
@@ -170,4 +172,28 @@ body {
             flex-direction: column;
             align-items: center;
             justify-content: center;
+}
+
+@keyframes wander {
+    0% { 
+        transform: translate(0, 0);
+    }
+    
+    25% {
+    transform: translate(12px, -8px);
+    
+}
+
+50% {
+transform: translate(-5px, -15px);
+
+}
+
+75% {
+    transform: translate(-12px, 5px);
+    }
+    100% {
+        transform: translate(0,0);
+}
+    
 }
