@@ -140,3 +140,51 @@ a.fade {
 .nextImage.clicked {
   animation: none;
 }
+
+.finalPhotoPage {
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.finalPhoto {
+  max-width: 80%;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  animation: photoAppear 3s ease forwards;
+}
+
+@keyframes photoAppear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.finalPhotoPage {
+  flex-direction: column;
+  gap: 35px;
+}
+
+.readAgainLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  
+  opacity: 0;
+  animation: photoAppear 3s ease forwards;
+  animation-delay: 2.5s
+}
+
+.readAgainLink span {
+  font-family: Georgia;
+  font-size: 1rem;
+}
