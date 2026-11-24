@@ -16,7 +16,7 @@ if (!soundFile) return;
 if (line.dataset.soundPlayed === "true") return;
 
 line.dataset.soundPlayed = "true";
-
+  
 const sound = new Audio(soundFile);
   sound.volume = 0;
 
